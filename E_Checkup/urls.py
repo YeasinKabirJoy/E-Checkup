@@ -18,6 +18,8 @@ from django.urls import path, include
 from userManagement import views as userView
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',userView.viewHomePage, name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('registration/', userView.registration, name='registration'),
+
 ]
