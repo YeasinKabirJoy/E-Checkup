@@ -65,3 +65,64 @@ class Doctor(User):
 
 
 
+class PatientManager(models.Manager):
+    def get_queryset(self,*args,**kwargs):
+        return super().get_queryset(*args,**kwargs).filter(type=Types.Patient)
+
+
+class Patient(User):
+    objects = PatientManager()
+
+    class Meta:
+        proxy = True
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.type = Types.Patient
+        return super().save(*args, **kwargs)
+
+
+# days = (
+#     ('Saturday','Saturday'),
+#     ('Sunday','Sunday'),
+#     ('Monday','Monday'),
+#     ('Tuesday','Tuesday'),
+#     ('Wednesday','Wednesday'),
+#     ('Thursday','Thursday'),
+#     ('Friday','Friday')
+# )
+
+
+class DoctorProfile(models.Model):
+    user = models.ForeignKey(Doctor, default=None, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50,blank=True,null=True)
+    email = models.EmailField(blank=True,null=True)
+    status = models.BooleanField(blank=True,null=True,default=True)
+
+    def __str__(self):
+        return self.user.username
+
+    def create_user_profile(sender, instance, created, **kwargs):
+        print('something')
+        if created and instance.type == Types.Doctor:
+            DoctorProfile.objects.create(user=instance)
+
+    post_save.connect(create_user_profile, sender=Doctor)
+
+
+class PatientProfile(models.Model):
+    name = models.CharField(max_length=50,blank=True,null=True)
+    email = models.EmailField(blank=True,null=True)
+    user = models.ForeignKey(Patient, default=None, on_delete=models.CASCADE)
+    status = models.BooleanField(blank=True,null=True,default=False)
+
+
+class Meeting(models.Model):
+    doctor = models.ForeignKey(Doctor,on_delete=models.DO_NOTHING,related_name='Doctor')
+    patient = models.ForeignKey(Patient,on_delete=models.DO_NOTHING,related_name='Patient')
+    day = models.DateField()
+    time = models.TimeField()
+
+
+
+
