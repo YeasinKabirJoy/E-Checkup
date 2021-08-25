@@ -25,14 +25,14 @@ class CustomUserManager(BaseUserManager):
         other_fields.setdefault('is_staff',True)
         other_fields.setdefault('is_superuser', True)
         other_fields.setdefault('is_active', True)
-        other_fields.setdefault('type', Types.Patient)
+        other_fields.setdefault('type', Types.Admin)
         return self.crete_user(username,password,**other_fields)
 
 
 class User(AbstractBaseUser,PermissionsMixin):
 
     username = models.CharField(max_length=50,unique=True)
-    type = models.CharField(max_length=20,choices=Types.choices,default=Types.Admin)
+    type = models.CharField(max_length=20,choices=Types.choices,default=Types.Patient)
     join_date = models.DateTimeField(default=timezone.now)
 
     is_staff = models.BooleanField(default=False)
