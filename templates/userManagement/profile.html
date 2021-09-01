@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="card text-center">
+    {% if profile.user.type == 'PATIENT' %}
+        <div class="card-header">
+            Patient Profile
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">{{ profile.user.username }}</h4>
+            <p class="card-text">
+                {% if profile.status %}
+                    <p><b>Status: </b>Verified</p>
+                    <p><b>Name: </b>{{ profile.name }}</p>
+                    <p><b>Email: </b>{{ profile.email }}</p>
+
+                {% else %}
+                    <p><b>Status: </b>Not Verified</p>
+                    Please verify yourself.
+                    <a href="#" class="btn btn-primary">Verify</a>
+                {% endif %}
+            </p>
+
+        </div>
+        <div class="card-footer text-muted">
+
+            <b>Joining date: </b>{{ profile.user.join_date }}
+        </div>
+        </div>
+
+    {% elif profile.user.type == 'DOCTOR' %}
+        <div class="card-header">
+            Doctor Profile
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">{{ profile.user.username }}</h4>
+            <p class="card-text">
+            <p><b>Name: </b>{{ profile.name }}</p>
+            <p><b>Email: </b>{{ profile.email }}</p>
+            </p>
+
+        </div>
+        <div class="card-footer text-muted">
+
+            <b>Joining date: </b>{{ profile.user.join_date }}
+        </div>
+        </div>
+
+    {% endif %}
+
+
+{% endblock content %}
