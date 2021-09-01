@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from .registrationForm import RegistrationForm
-from .models import PatientProfile, DoctorProfile, Types
+from .models import PatientProfile, DoctorProfile,Types,Doctor
 
 
 
@@ -45,3 +45,15 @@ def show_profile(request):
     }
 
     return render(request, 'userManagement/profile.html', context)
+
+
+def doctor_list(request):
+    doctors = DoctorProfile.objects.all()
+
+    context={
+        'doctors':doctors
+    }
+
+    return render(request, 'userManagement/doctorList.html', context)
+
+
