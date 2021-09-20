@@ -94,6 +94,7 @@ class Patient(User):
 
 
 class DoctorProfile(models.Model):
+    # image = models.ImageField(upload_to='doctor/', blank=True, null=True, default="doctor/default_icon.png")
     user = models.ForeignKey(Doctor, default=None, on_delete=models.CASCADE)
     name = models.CharField(max_length=50,blank=True,null=True)
     email = models.EmailField(blank=True,null=True)

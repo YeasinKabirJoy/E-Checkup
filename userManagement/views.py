@@ -22,6 +22,7 @@ def registration(request):
     }
     return render(request, 'userManagement/registration.html', context)
 
+
 def viewHomePage(request):
     return render(request, 'home.html')
 
