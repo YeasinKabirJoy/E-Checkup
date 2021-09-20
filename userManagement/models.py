@@ -94,22 +94,24 @@ class Patient(User):
 
 
 class DoctorProfile(models.Model):
-    # image = models.ImageField(upload_to='doctor/', blank=True, null=True, default="doctor/default_icon.png")
+    image = models.ImageField(upload_to='doctor/', blank=True, null=True, default="doctor/default_icon.png")
     user = models.ForeignKey(Doctor, default=None, on_delete=models.CASCADE)
     name = models.CharField(max_length=50,blank=True,null=True)
     email = models.EmailField(blank=True,null=True)
     status = models.BooleanField(blank=True,null=True,default=True)
+    degree = models.CharField(max_length=500,blank=True,null=True)
+    hospital_name = models.CharField(max_length=100,blank=True,null=True)
+    speciality = models.CharField(max_length=100,blank=True,null=True)
+
 
     def __str__(self):
         return self.user.username
 
     def create_user_profile(sender, instance, created, **kwargs):
-        print('something')
         if created and instance.type == Types.Doctor:
             DoctorProfile.objects.create(user=instance)
 
     post_save.connect(create_user_profile, sender=Doctor)
-
 
 class PatientProfile(models.Model):
     name = models.CharField(max_length=50,blank=True,null=True)
