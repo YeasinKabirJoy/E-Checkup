@@ -4,8 +4,6 @@ from .registrationForm import RegistrationForm
 from .models import PatientProfile, DoctorProfile,Types,Doctor
 
 
-
-
 def registration(request):
     form = RegistrationForm()
 
