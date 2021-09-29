@@ -55,4 +55,7 @@ def doctor_list(request):
 
     return render(request, 'userManagement/doctorList.html', context)
 
+def contact_us(request):
+    return render(request, 'userManagement/contactUs.html')
+
 
