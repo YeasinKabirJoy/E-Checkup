@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/contact_us.css' %}">
 
+
     <title>Title</title>
 
     <style>
@@ -77,20 +78,26 @@
             </form>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><a href="#" class="nav-link">Home</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">Page</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="#">Page 1</a>
-                            <a class="dropdown-item" href="#">Page 2</a>
-                            <a class="dropdown-item" href="#">Page 3</a>
-                            <a class="dropdown-item" href="#">Page 4</a>
-                        </div>
-                    </li>
-                    <li class="nav-item"><a href="#" class="nav-link">Catalog</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                    <li class="nav-item "><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+                    <li class="nav-item "><a href="{% url 'registration' %}" class="nav-link">Registration</a></li>
+                    <li class="nav-item "><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+                    <li class="nav-item "><a href="{% url 'profile' %}" class="nav-link">Profile</a></li>
+                    <li class="nav-item "><a href="{% url 'doctor_list' %}" class="nav-link">Doctor List</a></li>
+                    <li class="nav-item "><a href="{% url 'scheduling' %}" class="nav-link">Scheduling</a></li>
+                    <li class="nav-item "><a href="{% url 'contact_us' %}" class="nav-link">Contact Us</a></li>
+{#                    <li class="nav-item dropdown">#}
+{#                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"#}
+{#                           aria-haspopup="true" aria-expanded="false">Page</a>#}
+{#                        <div class="dropdown-menu" aria-labelledby="dropdown04">#}
+{#                            <a class="dropdown-item" href="#">Page 1</a>#}
+{#                            <a class="dropdown-item" href="#">Page 2</a>#}
+{#                            <a class="dropdown-item" href="#">Page 3</a>#}
+{#                            <a class="dropdown-item" href="#">Page 4</a>#}
+{#                        </div>#}
+{#                    </li>#}
+{#                    <li class="nav-item"><a href="#" class="nav-link">Catalog</a></li>#}
+{#                    <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>#}
+{#                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>#}
                 </ul>
             </div>
         </div>
@@ -100,14 +107,11 @@
         {% block content%}
 
         {% endblock content %}
-        <a href="{% url 'login' %}">Login</a>
-        <a href="{% url 'registration' %}">Registration</a>
 
     </div>
 
     <!-- END nav -->
 
-</section>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

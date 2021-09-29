@@ -140,6 +140,9 @@
         .loginbttm {
             padding: 0px;
         }
+            a:hover {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -170,6 +173,17 @@
                             </div>
                         </div>
                     </form>
+                    <p>Already Registered?
+                        <a href="{% url 'login' %}" class=" btn-outline-primary">
+                            Login
+                        </a>
+                    </p>
+                    <p>Back to
+                        <a href="{% url 'home' %}" class=" btn-outline-primary">
+                            Home
+                        </a>
+                    </p>
+
                 </div>
             </div>
             <div class="col-lg-3 col-md-2"></div>

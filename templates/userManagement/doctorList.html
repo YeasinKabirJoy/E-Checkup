@@ -19,13 +19,13 @@
     {% for d in  doctors %}
         {% if  d.name is not None %}
         <div class="col-md-3">
-            <div class="card p-2 py-3 text-center">
+            <div class="card p-2 py-3 text-center" style="background: #dfe3d2">
                 <div class="img mb-2"> <img src="{{ d.image.url }}" width="60" height="60" class="rounded-circle"> </div>
                 <h5 class="mb-0">{{ d.name}}</h5> <small>{{ d.speciality }}</small>
                 <small>{{ d.degree }}</small>
                 <small>{{ d.hospital_name }}</small>
 {#                <div class="ratings mt-2"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>#}
-                <div class="mt-4 apointment"> <button class="btn btn-success text-uppercase">Book Appointment</button> </div>
+                <div class="mt-4 apointment"> <button class="btn btn-outline-success text-uppercase">Book Appointment</button> </div>
             </div>
         </div>
         {% endif %}

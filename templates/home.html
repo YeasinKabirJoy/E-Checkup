@@ -1,4 +1,6 @@
+{% extends 'base.html' %}
 {% load static %}
+{% block content %}
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -7,48 +9,11 @@
 
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'css/style_home.css' %}">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
         <title>Slider</title>
     </head>
     <body>
-
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-        <div class="container">
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-                    aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="fa fa-bars"></span> Menu
-            </button>
-            <form action="#" class="searchform order-lg-last">
-                <div class="form-group d-flex">
-                    <input type="text" class="form-control pl-3" placeholder="Search">
-                    <button type="submit" placeholder="" class="form-control search"><span class="fa fa-search"></span>
-                    </button>
-                </div>
-            </form>
-            <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><a href="#" class="nav-link">Home</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">Page</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="#">Page 1</a>
-                            <a class="dropdown-item" href="#">Page 2</a>
-                            <a class="dropdown-item" href="#">Page 3</a>
-                            <a class="dropdown-item" href="#">Page 4</a>
-                        </div>
-                    </li>
-                    <li class="nav-item"><a href="#" class="nav-link">Catalog</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-        <div class="container">
+        <div class="container1">
             <div class="slider">
 
                 <div class="box1 box">
@@ -60,7 +25,7 @@
                             elit. Integer lacinia dui lectus. Donec scelerisque ipsum
                             diam, ac mattis orci pellentesque eget.
                         </p>
-                        <button>Check Now</button>
+
                     </div>
 
                     <div class="illustration"><div class="inner"></div></div>
@@ -76,7 +41,7 @@
                             elit. Integer lacinia dui lectus. Donec scelerisque ipsum
                             diam, ac mattis orci pellentesque eget.
                         </p>
-                        <button>Check Now</button>
+
                     </div>
 
                     <div class="illustration"><div class="inner"></div></div>
@@ -91,7 +56,7 @@
                             elit. Integer lacinia dui lectus. Donec scelerisque ipsum
                             diam, ac mattis orci pellentesque eget.
                         </p>
-                        <button>Check Now</button>
+
                     </div>
 
                     <div class="illustration"><div class="inner"></div></div>
@@ -106,7 +71,7 @@
                             elit. Integer lacinia dui lectus. Donec scelerisque ipsum
                             diam, ac mattis orci pellentesque eget.
                         </p>
-                        <button>Check Now</button>
+
                     </div>
 
                     <div class="illustration"><div class="inner"></div></div>
@@ -121,7 +86,7 @@
                             elit. Integer lacinia dui lectus. Donec scelerisque ipsum
                             diam, ac mattis orci pellentesque eget.
                         </p>
-                        <button>Check Now</button>
+
                     </div>
 
                     <div class="illustration"><div class="inner"></div></div>
@@ -151,3 +116,4 @@
         <script src="{% static 'js/home.js' %}"></script>
     </body>
 </html>
+{% endblock content %}

@@ -18,7 +18,6 @@ from django.urls import path, include
 from userManagement import views as userView
 from django.conf.urls.static import static
 from django.conf import settings
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',userView.viewHomePage, name='home'),
@@ -26,6 +25,9 @@ urlpatterns = [
     path('registration/', userView.registration, name='registration'),
     path('profile/', userView.show_profile, name='profile'),
     path('doctor_list/',userView.doctor_list,name='doctor_list'),
-    path('contact_us/',userView.contact_us,name='contact_us')
+    path('contact_us/',userView.contact_us,name='contact_us'),
+    path('scheduling/',userView.scheduling,name='scheduling'),
+
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

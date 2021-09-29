@@ -14,8 +14,8 @@
 	}
 }
  body {
-	 background-color: #fff;
-	 color: #fff;
+	 background-color: #0c0c0c;
+	 color: #ffffff;
 	 padding: 8rem;
 }
  @media only screen and (max-width: 1000px) {
@@ -23,7 +23,7 @@
 		 padding: 0;
 	}
 }
- .container {
+ .container1 {
 	 position: relative;
 	 overflow: hidden;
 	 border-radius: 5rem;
@@ -120,6 +120,7 @@
 	}
 }
  .slider .box .details h1 {
+	 color: white;
 	 font-size: 3.5rem;
 	 font-weight: 500;
 	 margin-bottom: 0.5rem;
@@ -136,22 +137,23 @@
 		 margin-right: 0;
 	}
 }
- .slider .box .details button {
-	 padding: 1rem 3rem;
-	 color: #fff;
-	 border-radius: 2rem;
-	 outline: none;
-	 border: none;
-	 cursor: pointer;
-	 transition: all 0.3s ease;
-}
- .slider .box .details button:hover {
-	 opacity: 0.8;
-}
- .slider .box .details button:focus {
-	 outline: none;
-	 border: none;
-}
+
+/* .slider .box .details button {*/
+/*	 padding: 1rem 3rem;*/
+/*	 color: #fff;*/
+/*	 border-radius: 2rem;*/
+/*	 outline: none;*/
+/*	 border: none;*/
+/*	 cursor: pointer;*/
+/*	 transition: all 0.3s ease;*/
+/*}*/
+/* .slider .box .details button:hover {*/
+/*	 opacity: 0.8;*/
+/*}*/
+/* .slider .box .details button:focus {*/
+/*	 outline: none;*/
+/*	 border: none;*/
+/*}*/
  .slider .box1 {
 	 background-color: #500033;
 }

@@ -8,7 +8,7 @@ let value = 0
 // trail index number
 let trailValue = 0
 // interval (Duration)
-let interval = 4000
+let interval = 10000
 
 // Function to slide forward
 const slide = (condition) => {
@@ -52,11 +52,11 @@ const move = (S, T) => {
     trail[T].classList.add("active")
 }
 
-const tl = gsap.timeline({defaults: {duration: 0.6, ease: "power2.inOut"}})
+const tl = gsap.timeline({defaults: {duration: 0.9, ease: "power2.inOut"}})
 tl.from(".bg", {x: "-100%", opacity: 0})
   .from("p", {opacity: 0}, "-=0.3")
   .from("h1", {opacity: 0, y: "30px"}, "-=0.3")
-  .from("button", {opacity: 0, y: "-40px"}, "-=0.8")
+  // .from("button", {opacity: 0, y: "-40px"}, "-=0.8")
 
 // function to restart animation
 const animate = () => tl.restart()

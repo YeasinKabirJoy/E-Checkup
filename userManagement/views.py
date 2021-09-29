@@ -58,4 +58,7 @@ def doctor_list(request):
 def contact_us(request):
     return render(request, 'userManagement/contactUs.html')
 
+def scheduling(request):
+    return render(request, 'userManagement/scheduling.html')
+
 
