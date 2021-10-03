@@ -1,6 +1,9 @@
+import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from .registrationForm import RegistrationForm
+from .meetingForm import MeetingForm
 from .models import PatientProfile, DoctorProfile,Types,Doctor
 
 
@@ -54,6 +57,30 @@ def doctor_list(request):
     }
 
     return render(request, 'userManagement/doctorList.html', context)
+
+
+def create_meeting(request,doc_id):
+    form = MeetingForm()
+
+    if request.method == 'POST':
+        form = MeetingForm(request.POST)
+        if form.is_valid():
+            doc=Doctor.objects.get(id=doc_id)
+            a=form.save(commit=False)
+            a.doctor=doc
+            a.patient=request.user
+
+            delta = datetime.timedelta(minutes=15)
+            t = a.s_time
+            a.e_time=(datetime.datetime.combine(datetime.datetime.now().date(), t) + delta).time()
+            # a.e_time= a.s_time+datetime.timedelta(hours=00,minutes=15,seconds=00)
+            a.save()
+            form = MeetingForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'userManagement/create_meeting.html', context)
+
 
 def contact_us(request):
     return render(request, 'userManagement/contactUs.html')

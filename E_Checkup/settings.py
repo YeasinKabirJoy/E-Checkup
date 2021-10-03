@@ -39,11 +39,27 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'userManagement'
+    'bootstrap_datepicker_plus',
+    'bootstrap4',
+    'jquery',
+    'userManagement',
 ]
+
+TIME_INPUT_FORMATS = [
+    # '%I:%M:%S %p',  # 6:22:44 PM
+    '%I:%M %p',  # 6:22 PM
+    # '%I %p',  # 6 PM
+    # '%H:%M:%S',     # '14:30:59'
+    # '%H:%M:%S.%f',  # '14:30:59.000200'
+    # '%H:%M',        # '14:30'
+]
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 #CRISPY_TEMPLATE_PACK = 'uni_form'
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

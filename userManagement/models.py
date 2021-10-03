@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,PermissionsMixin
@@ -123,9 +125,20 @@ class PatientProfile(models.Model):
 class Meeting(models.Model):
     doctor = models.ForeignKey(Doctor,on_delete=models.DO_NOTHING,related_name='Doctor')
     patient = models.ForeignKey(Patient,on_delete=models.DO_NOTHING,related_name='Patient')
-    day = models.DateField()
-    time = models.TimeField()
+    date = models.DateField(auto_now=True)
+    s_time = models.TimeField()
+    e_time = models.TimeField()
+
+    def __str__(self):
+        return str(self.date)
 
 
+
+    def is_open(self):
+        return self.s_time <= datetime.now().time() < self.e_time
+
+
+# day = models.DateField(default=datetime.now().date().strftime('%d-%m-%y'))
+#e_time = models.TimeField(default=datetime.now() + timedelta(minutes=15))
 
 

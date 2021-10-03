@@ -27,6 +27,8 @@ urlpatterns = [
     path('doctor_list/',userView.doctor_list,name='doctor_list'),
     path('contact_us/',userView.contact_us,name='contact_us'),
     path('scheduling/',userView.scheduling,name='scheduling'),
+    # path('meeting/',userView.create_meeting,name='meeting'),
+    path('doctor_list/<int:doc_id>',userView.create_meeting, name = 'meeting'),
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
