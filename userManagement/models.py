@@ -15,6 +15,10 @@ class Types(models.TextChoices):
     Doctor = 'DOCTOR', 'Doctor'
     Admin = 'ADMIN', 'Admin'
 
+class Gender(models.TextChoices):
+    Male = 'MALE', 'Male'
+    Female = 'FEMALE', 'Female'
+
 
 class CustomUserManager(BaseUserManager):
     def crete_user(self,username,password,**other_fields):
@@ -22,6 +26,7 @@ class CustomUserManager(BaseUserManager):
         user.set_password(password)
         user.save()
         return user
+
 
     def create_superuser(self,username,password,**other_fields):
         other_fields.setdefault('is_staff',True)
@@ -84,20 +89,11 @@ class Patient(User):
         return super().save(*args, **kwargs)
 
 
-# days = (
-#     ('Saturday','Saturday'),
-#     ('Sunday','Sunday'),
-#     ('Monday','Monday'),
-#     ('Tuesday','Tuesday'),
-#     ('Wednesday','Wednesday'),
-#     ('Thursday','Thursday'),
-#     ('Friday','Friday')
-# )
 
 
 class DoctorProfile(models.Model):
     image = models.ImageField(upload_to='doctor/', blank=True, null=True, default="doctor/default_icon.png",)
-    user = models.ForeignKey(Doctor, default=None, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
     name = models.CharField(max_length=50,blank=True,null=True)
     email = models.EmailField(blank=True,null=True)
     status = models.BooleanField(blank=True,null=True,default=True)
@@ -115,12 +111,18 @@ class DoctorProfile(models.Model):
 
     post_save.connect(create_user_profile, sender=Doctor)
 
+
+
 class PatientProfile(models.Model):
     name = models.CharField(max_length=50,blank=True,null=True)
+    gender = models.CharField(max_length=10,blank=True,null=True)
+    blood_group = models.CharField(max_length=5,blank=True,null=True)
     email = models.EmailField(blank=True,null=True)
-    user = models.ForeignKey(Patient, default=None, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
     status = models.BooleanField(blank=True,null=True,default=False)
 
+    def __str__(self):
+        return self.user.username
 
 class Meeting(models.Model):
     doctor = models.ForeignKey(Doctor,on_delete=models.DO_NOTHING,related_name='Doctor')

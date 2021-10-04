@@ -107,9 +107,13 @@ def send_email(request):
         context = {
             'message': user_message
         }
-        return render(request, 'registration/send_email.html', context)
+        return render(request, 'registration /send_email.html', context)
     if request.method == 'POST':
-        email=request.POST['recipient']
+
+        name =request.POST['name']
+        gender =request.POST['gender']
+        blood =request.POST['blood']
+        email = request.POST['recipient']
         try:
             RegisteredEmail.objects.get(email=email)
             user_message ='Email alreday exists'
@@ -124,6 +128,9 @@ def send_email(request):
             code = id_generator()
             # v_code = code
             request.session['v_code'] = code
+            request.session['name'] = name
+            request.session['gender'] = gender
+            request.session['blood'] = blood
             request.session['email'] = email
 
             message += 'Do Not Share With Anyone'
@@ -169,6 +176,10 @@ def verify_email(request):
             message = "Successful! Your account is activated now!"
             profile = PatientProfile.objects.get(user=request.user)
             profile.status = True
+            profile.name = request.session['name']
+            profile.gender = request.session['gender']
+            profile.blood_group = request.session['blood']
+            profile.email = request.session['email']
             profile.save()
             context = {
                 'message': message

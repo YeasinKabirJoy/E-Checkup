@@ -7,13 +7,51 @@
             Send Email
         </div>
         <div class="card-body">
-            <h5 class="card-title">Your Institute Email</h5>
+            <h5 class="card-title">Please submit all the necessary information </h5>
             <form method="POST">
                 {% csrf_token %}
-                <input type="email" name="recipient">
+                <div class="form-group">
+                <label for="name" class="required">Name</label>
+                 <br>
+                <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                <label for="gender" class="required">Select Gender</label>
+                    <br>
+                <select id="gender" name="gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                </div>
+
+                <div class="form-group">
+                <label for="gender" class="required">Blood Group</label>
+                    <br>
+                <select id="blood" name="blood" required>
+                    <option value="A+">A+</option>
+                    <option value="B+">B+</option>
+                    <option value="O+">O+</option>
+                    <option value="AB-">AB+</option>
+                    <option value="A-">A-</option>
+                    <option value="B-">B-</option>
+                    <option value="O-">O-</option>
+                    <option value="AB-">AB-</option>
+                </select>
+                </div>
+
+                <div class="form-group">
+                <label for="recipient" class="required">Email</label>
+                 <br>
+                <input type="email" id="recipient" name="recipient" required>
+                </div>
+
                 <input type="submit">
             </form>
         </div>
     </div>
+
+
 
 {% endblock content %}
