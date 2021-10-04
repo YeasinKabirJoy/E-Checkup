@@ -138,6 +138,14 @@ class Meeting(models.Model):
         return self.s_time <= datetime.now().time() < self.e_time
 
 
+class RegisteredEmail(models.Model):
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.email
+
+
+
 # day = models.DateField(default=datetime.now().date().strftime('%d-%m-%y'))
 #e_time = models.TimeField(default=datetime.now() + timedelta(minutes=15))
 
