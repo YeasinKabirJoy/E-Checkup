@@ -19,7 +19,7 @@ from userManagement import views as userView
 from django.conf.urls.static import static
 from django.conf import settings
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='adminpanel'),
     path('',userView.viewHomePage, name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('registration/', userView.registration, name='registration'),
