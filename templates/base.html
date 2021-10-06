@@ -115,7 +115,7 @@
 
                         {% if usertype == 'ADMIN' %}
                             <li class="nav-item "><a href="{% url 'home' %}" class="nav-link">Home</a></li>
-                            <li class="nav-item "><a href="{% url 'adminpanel' %}" class="nav-link">Admin Panel</a></li>
+                            <li class="nav-item "><a href="{% url 'admin:index' %}" class="nav-link">Admin Panel</a></li>
                             <li class="nav-item "><a href="{% url 'doctor_list' %}" class="nav-link">Doctor List</a>
                             </li>
                             <li class="nav-item "><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
