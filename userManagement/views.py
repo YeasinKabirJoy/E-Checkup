@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from .registrationForm import RegistrationForm
 from .meetingForm import MeetingForm
-from .models import PatientProfile, DoctorProfile,Types,Doctor,RegisteredEmail
+from .models import PatientProfile, DoctorProfile,Types,Doctor,RegisteredEmail,DoctorTiming
 import random
 import string
 
@@ -63,8 +63,8 @@ def doctor_list(request):
 
 
 def create_meeting(request,doc_id):
-    form = MeetingForm()
 
+    form = MeetingForm()
     if request.method == 'POST':
         form = MeetingForm(request.POST)
         if form.is_valid():
@@ -79,10 +79,15 @@ def create_meeting(request,doc_id):
             # a.e_time= a.s_time+datetime.timedelta(hours=00,minutes=15,seconds=00)
             a.save()
             form = MeetingForm()
+
+    timing = DoctorTiming.objects.get(doctor = Doctor.objects.get(id=doc_id))
+
     context = {
         'form': form,
+        'timing': timing,
     }
     return render(request, 'userManagement/create_meeting.html', context)
+
 
 
 def contact_us(request):

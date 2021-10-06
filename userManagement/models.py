@@ -108,6 +108,8 @@ class DoctorProfile(models.Model):
     def create_user_profile(sender, instance, created, **kwargs):
         if created and instance.type == Types.Doctor:
             DoctorProfile.objects.create(user=instance)
+            DoctorTiming.objects.create(doctor=instance)
+
 
     post_save.connect(create_user_profile, sender=Doctor)
 
@@ -131,6 +133,9 @@ class Meeting(models.Model):
     s_time = models.TimeField()
     e_time = models.TimeField()
 
+    class Meta:
+        unique_together = ('doctor','s_time')
+
     def __str__(self):
         return str(self.date)
 
@@ -139,12 +144,23 @@ class Meeting(models.Model):
     def is_open(self):
         return self.s_time <= datetime.now().time() < self.e_time
 
+class DoctorTiming(models.Model):
+    doctor = models.ForeignKey(Doctor,on_delete=models.CASCADE)
+    day = models.CharField(max_length=50,blank=True,null=True)
+    time = models.CharField(max_length=50,blank=True,null=True)
+
+    def __str__(self):
+        return self.doctor.username
+
+
 
 class RegisteredEmail(models.Model):
     email = models.EmailField()
 
     def __str__(self):
         return self.email
+
+
 
 
 

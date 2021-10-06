@@ -20,7 +20,7 @@
                 {% else %}
                     <p><b>Status: </b>Not Verified</p>
                     Please verify yourself.
-                    <a href="#" class="btn btn-primary">Verify</a>
+                    <a href="{% url 'send_mail' %}" class="btn btn-primary">Verify</a>
                 {% endif %}
             </p>
 
