@@ -81,10 +81,14 @@ def create_meeting(request,doc_id):
             form = MeetingForm()
 
     timing = DoctorTiming.objects.get(doctor = Doctor.objects.get(id=doc_id))
+    profile = DoctorProfile.objects.get(user = Doctor.objects.get(id=doc_id))
 
     context = {
         'form': form,
         'timing': timing,
+        'profile': profile,
+
+
     }
     return render(request, 'userManagement/create_meeting.html', context)
 
