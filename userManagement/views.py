@@ -63,22 +63,26 @@ def doctor_list(request):
 
 
 def create_meeting(request,doc_id):
+    msg=''
 
     form = MeetingForm()
     if request.method == 'POST':
         form = MeetingForm(request.POST)
-        if form.is_valid():
-            doc=Doctor.objects.get(id=doc_id)
-            a=form.save(commit=False)
-            a.doctor=doc
-            a.patient=request.user
+        try:
+            if form.is_valid():
+                doc=Doctor.objects.get(id=doc_id)
+                a=form.save(commit=False)
+                a.doctor=doc
+                a.patient=request.user
 
-            delta = datetime.timedelta(minutes=15)
-            t = a.s_time
-            a.e_time=(datetime.datetime.combine(datetime.datetime.now().date(), t) + delta).time()
-            # a.e_time= a.s_time+datetime.timedelta(hours=00,minutes=15,seconds=00)
-            a.save()
-            form = MeetingForm()
+                delta = datetime.timedelta(minutes=15)
+                t = a.s_time
+                a.e_time=(datetime.datetime.combine(datetime.datetime.now().date(), t) + delta).time()
+                # a.e_time= a.s_time+datetime.timedelta(hours=00,minutes=15,seconds=00)
+                a.save()
+                form = MeetingForm()
+        except Exception:
+            msg = 'Not available for booking.'
 
     timing = DoctorTiming.objects.get(doctor = Doctor.objects.get(id=doc_id))
     profile = DoctorProfile.objects.get(user = Doctor.objects.get(id=doc_id))
@@ -88,6 +92,7 @@ def create_meeting(request,doc_id):
         'timing': timing,
         'profile': profile,
         'scheduled_meeting':scheduled_meeting,
+        'msg' : msg
 
     }
     return render(request, 'userManagement/create_meeting.html', context)

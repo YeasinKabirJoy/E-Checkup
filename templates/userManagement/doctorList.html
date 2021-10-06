@@ -29,10 +29,12 @@
                             <div class="mt-4 apointment">
                                 {% if user.is_authenticated %}
                                     {% if usertype == 'PATIENT' %}
-                                        <a href="{{ d.user.id }}">
-                                            <button class="btn btn-outline-success text-uppercase">Book Appointment
-                                            </button>
-                                        </a>
+                                        {% if userStatus == 'Verified' %}
+                                            <a href="{{ d.user.id }}">
+                                                <button class="btn btn-outline-success text-uppercase">Book Appointment
+                                                </button>
+                                            </a>
+                                        {% endif %}
                                     {% endif %}
                                 {% endif %}
                             </div>
