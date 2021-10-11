@@ -103,7 +103,12 @@ def contact_us(request):
     return render(request, 'userManagement/contactUs.html')
 
 def scheduling(request):
-    return render(request, 'userManagement/scheduling.html')
+    meeting = Meeting.objects.filter(patient=request.user)
+
+    context = {
+        'meeting' : meeting
+    }
+    return render(request, 'userManagement/scheduling.html', context)
 
 def id_generator(size=16, chars = string.ascii_uppercase + string.ascii_lowercase + string.digits + string.punctuation) :
     return ''.join(random.choice(chars) for _ in range(size))
