@@ -18,6 +18,7 @@ from django.urls import path, include
 from userManagement import views as userView
 from django.conf.urls.static import static
 from django.conf import settings
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',userView.viewHomePage, name='home'),
@@ -31,6 +32,7 @@ urlpatterns = [
     path('doctor_list/<int:doc_id>',userView.create_meeting, name = 'meeting'),
     path('verify_profile/', userView.send_email, name='send_mail'),
     path('email_verification/', userView.verify_email, name='verification'),
+    path('abcd/', include('video.urls')),
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
