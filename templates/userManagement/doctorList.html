@@ -19,10 +19,10 @@
             {% for d in  doctors %}
                 {% if  d.name is not None %}
                     <div class="col-md-3">
-                        <div class="card p-2 py-3 text-center" style="background: #dfe3d2">
+                        <div class="card p-2 py-3 text-center" style="background: #071c34; height: 100%; color:white">
                             <div class="img mb-2"><img src="{{ d.image.url }}" width="60" height="60"
                                                        class="rounded-circle"></div>
-                            <h5 class="mb-0">{{ d.name }}</h5> <small>{{ d.speciality }}</small>
+                            <h5 class="mb-0" style="color: #FFE333 "><b>{{ d.name }}</b></h5> <small style="color:#85C1E9;">{{ d.speciality }}</small>
                             <small>{{ d.degree }}</small>
                             <small>{{ d.hospital_name }}</small>
                             {#                <div class="ratings mt-2"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>#}
@@ -31,7 +31,7 @@
                                     {% if usertype == 'PATIENT' %}
                                         {% if userStatus == 'Verified' %}
                                             <a href="{{ d.user.id }}">
-                                                <button class="btn btn-outline-success text-uppercase">Book Appointment
+                                                <button class="btn btn-outline-warning text-uppercase ">Book Appointment
                                                 </button>
                                             </a>
                                         {% endif %}
