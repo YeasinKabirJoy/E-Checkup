@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from .registrationForm import RegistrationForm
 from .meetingForm import MeetingForm
-from .models import PatientProfile, DoctorProfile,Types,Doctor,RegisteredEmail,DoctorTiming,Meeting
+from .models import PatientProfile, DoctorProfile,Types,Doctor,RegisteredEmail,Meeting
 import random
 import string
 
@@ -84,12 +84,11 @@ def create_meeting(request,doc_id):
         except Exception:
             msg = 'Not available for booking.'
 
-    timing = DoctorTiming.objects.get(doctor = Doctor.objects.get(id=doc_id))
+
     profile = DoctorProfile.objects.get(user = Doctor.objects.get(id=doc_id))
     scheduled_meeting = Meeting.objects.filter(doctor = Doctor.objects.get(id=doc_id),date=datetime.datetime.now().date().strftime("%Y-%m-%d"))
     context = {
         'form': form,
-        'timing': timing,
         'profile': profile,
         'scheduled_meeting':scheduled_meeting,
         'msg' : msg

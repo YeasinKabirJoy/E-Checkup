@@ -100,6 +100,8 @@ class DoctorProfile(models.Model):
     degree = models.CharField(max_length=500,blank=True,null=True)
     hospital_name = models.CharField(max_length=100,blank=True,null=True)
     speciality = models.CharField(max_length=100,blank=True,null=True)
+    day = models.CharField(max_length=50, blank=True, null=True)
+    time = models.CharField(max_length=50, blank=True, null=True)
 
 
     def __str__(self):
@@ -108,7 +110,6 @@ class DoctorProfile(models.Model):
     def create_user_profile(sender, instance, created, **kwargs):
         if created and instance.type == Types.Doctor:
             DoctorProfile.objects.create(user=instance)
-            DoctorTiming.objects.create(doctor=instance)
 
 
     post_save.connect(create_user_profile, sender=Doctor)
@@ -144,13 +145,6 @@ class Meeting(models.Model):
     def is_open(self):
         return self.s_time <= datetime.now().time() < self.e_time
 
-class DoctorTiming(models.Model):
-    doctor = models.ForeignKey(Doctor,on_delete=models.CASCADE)
-    day = models.CharField(max_length=50,blank=True,null=True)
-    time = models.CharField(max_length=50,blank=True,null=True)
-
-    def __str__(self):
-        return self.doctor.username
 
 
 
