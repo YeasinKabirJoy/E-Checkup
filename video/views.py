@@ -10,6 +10,7 @@ from django.shortcuts import render
 
 from .agora_key.RtcTokenBuilder import RtcTokenBuilder, Role_Attendee
 from pusher import Pusher
+from userManagement.models import User,DoctorProfile,PatientProfile
 
 # Instantiate a Pusher Client
 pusher_client = Pusher(app_id=os.environ.get('PUSHER_APP_ID'),
@@ -20,11 +21,25 @@ pusher_client = Pusher(app_id=os.environ.get('PUSHER_APP_ID'),
                        )
 
 
-@login_required(login_url='/admin/')
-def index(request):
-    User = get_user_model()
-    all_users = User.objects.exclude(id=request.user.id).only('id', 'username')
-    return render(request, 'agora/index.html', {'allUsers': all_users})
+# @login_required(login_url='/admin/')
+@login_required
+def index(request,id):
+    # User = get_user_model()
+    # all_users = User.objects.exclude(id=request.user.id).only('id', 'username')
+    singleUser = User.objects.get(id=id)
+    profile=''
+
+    if singleUser.type == "DOCTOR":
+        profile = DoctorProfile.objects.get(user=singleUser)
+    elif singleUser.type == "PATIENT":
+        profile = PatientProfile.objects.get(user=singleUser)
+
+    context={
+        'singleUser': singleUser,
+        'profile':profile
+    }
+
+    return render(request, 'agora/index.html', context)
 
 
 def pusher_auth(request):

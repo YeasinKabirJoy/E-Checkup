@@ -103,10 +103,20 @@ def contact_us(request):
     return render(request, 'userManagement/contactUs.html')
 
 def scheduling(request):
-    meeting = Meeting.objects.filter(patient=request.user)
+    meeting = Meeting.objects.filter(patient=request.user,date =  datetime.datetime.now().date().strftime("%Y-%m-%d"))
+    doc_meeting = Meeting.objects.filter(doctor=request.user,date =  datetime.datetime.now().date().strftime("%Y-%m-%d"))
+    previous_meeting = Meeting.objects.filter(patient=request.user).exclude(date=datetime.datetime.now().date().strftime("%Y-%m-%d"))
+
+    doc_profile = DoctorProfile.objects.all()
+    patient_profile = PatientProfile.objects.all()
+
 
     context = {
-        'meeting' : meeting
+        'meeting' : meeting,
+        'previous_meeting':previous_meeting,
+        'doc_meeting':doc_meeting,
+        'doc':doc_profile,
+        'patient':patient_profile
     }
     return render(request, 'userManagement/scheduling.html', context)
 

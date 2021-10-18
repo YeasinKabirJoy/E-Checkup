@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'jquery',
     'userManagement',
+    'video'
 ]
 
 TIME_INPUT_FORMATS = [

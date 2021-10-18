@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -10,24 +11,148 @@
         <link rel="stylesheet" href="{% static 'css/scheduling.css' %}">
     </head>
     <body>
+    {% if usertype == 'PATIENT' %}
+     <div style="text-align: center; margin-top: 15px">
+        <h5 style="color: black"><p style="color: black">
+            Today's Appointment
+        </p></h5>
+    </div>
 
-    <div class="container mt-5 mb-5">
+   {% if meeting.count == 0 %}
+       <div style="text-align: center; margin-top: 15px">
+        <h5 style="color: black"><p style="color: red">
+            No Appointment
+        </p></h5>
+    </div>
+   {% else %}
+       <div class="container mt-5 mb-5">
         <div class="row g-2">
             {% for m in  meeting.all %}
                 <div class="col-md-3">
-                    <div class="card p-2 py-3 text-center" style="background: #dfe3d2">
-
-                        <h5 class="mb-0">{{ d.name }}</h5> <small>{{ d.speciality }}</small>
-                        <small>{{ m.doctor }}</small>
-                        <small>{{ m.s_time }}</small>
+                    <div class="card p-2 py-3 text-center" style="min-height: 90%">
+                    {% if m.is_open %}
+                       {% for d in doc %}
+                        {% if d.user == m.doctor%}
+                            <small style="color: white">{{ d.name }}</small>
+                        {% endif %}
+                            {% endfor %}
+                        <small style="color:white;">{{ m.s_time }} - {{ m.e_time }}</small>
+                     {% else %}
+                        {% for d in doc %}
+                        {% if d.user == m.doctor%}
+                            <h5></h5>
+                            <h5></h5>
+                            <h5>{{ d.name }}</h5>
+                        {% endif %}
+                            {% endfor %}
+                        <h5>{{ m.s_time }} - {{ m.e_time }}</h5>
+                    {% endif%}
                         {#                <div class="ratings mt-2"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>#}
                         <div class="mt-4 apointment">
 
-
-                            <a href="{{ d.user.id }}">
+                           {% if m.is_open %}
+                            <a href="{{ m.doctor.id }}">
                                 <button class="btn btn-outline-success text-uppercase">Go to Meeting
                                 </button>
                             </a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+   {% endif  %}
+
+
+
+        <div class="mb-4">
+        <h6 class="text-uppercase">Solid</h6>
+        <!-- Solid divider -->
+        <hr class="solid">
+    </div>
+
+    <div>
+        <h5 style="color: black"><p style="text-align: center">
+            Previous Appointment
+        </p></h5>
+    </div>
+
+     {% if previous_meeting.count == 0 %}
+       <div style="text-align: center; margin-top: 15px">
+        <h5 style="color: black"><p style="color: red">
+            No Previous Appointment
+        </p></h5>
+    </div>
+   {% else %}
+          <div class="container mt-5 mb-5">
+        <div class="row g-2">
+            {% for pm in  previous_meeting.all %}
+                <div class="col-md-3">
+                    <div class="card p-2 py-3 text-center">
+                        {% for d in doc %}
+                        {% if d.user == pm.doctor%}
+                            <small>{{ d.name }}</small>
+                        {% endif %}
+                            {% endfor %}
+
+                        <small>{{ pm.date }}</small>
+                        <small>{{ pm.s_time }} - {{ pm.e_time }}</small>
+                        {#                <div class="ratings mt-2"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>#}
+                        <div class="mt-4 apointment">
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+{% elif  usertype == 'DOCTOR' %}
+             <div style="text-align: center; margin-top: 15px">
+        <h5 style="color: black"><p style="color: black">
+            Today's Appointment
+        </p></h5>
+    </div>
+
+   {% if doc_meeting.count == 0 %}
+       <div style="text-align: center; margin-top: 15px">
+        <h5 style="color: black"><p style="color: red">
+            No Appointment
+        </p></h5>
+    </div>
+   {% else %}
+       <div class="container mt-5 mb-5">
+        <div class="row g-2">
+            {% for m in  doc_meeting.all %}
+                <div class="col-md-3">
+                    <div class="card p-2 py-3 text-center" style="min-height: 90%">
+
+                       {% if m.is_open %}
+                       {% for d in patient %}
+                        {% if d.user == m.patient%}
+                            <small style="color: white">{{ d.name }}</small>
+                        {% endif %}
+                            {% endfor %}
+                        <small style="color:white">{{ m.s_time }} - {{ m.e_time }}</small>
+                       {% else %}
+                           {% for d in patient %}
+                        {% if d.user == m.patient%}
+                            <h5 style="color: white">{{ d.name }}</h5>
+                        {% endif %}
+                            {% endfor %}
+                        <h5 style="color:white">{{ m.s_time }} - {{ m.e_time }}</h5>
+                        {% endif %}
+                        {#                <div class="ratings mt-2"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>#}
+                        <div class="mt-4 apointment">
+
+                            {% if m.is_open %}
+                            <a href="{{ m.patient.id }}">
+                                <button class="btn btn-outline-success text-uppercase">Go to Meeting
+                                </button>
+                            </a>
+                            {% endif %}
 
 
                         </div>
@@ -37,117 +162,15 @@
         </div>
     </div>
 
+   {% endif  %}
 
 
-    <div style="text-align: center; margin-top: 15px">
-        <h5 style="color: black"><p style="color: black">
-            Upcoming Schedules
-        </p></h5>
-    </div>
-    <div class="container mx-auto mt-4">
 
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                    {#  <img src="https://i.imgur.com/ZTkt4I5.jpg" class="card-img-top" alt="...">#}
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 ">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn mr-2"><i class="fa fa-link"></i>Go to Meeting</a>
 
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                    {#  <img src="https://i.imgur.com/ZTkt4I5.jpg" class="card-img-top" alt="...">#}
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card's content.</p>
-                        <a href="#" class="btn mr-2"><i class="fa fa-link"></i>Go to Meeting</a>
+{% endif %}
 
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                    {#  <img src="https://i.imgur.com/ZTkt4I5.jpg" class="card-img-top" alt="...">#}
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 ">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary mr-2"><i class="fa fa-link"></i>Go to Meeting</a>
 
-                    </div>
-                </div>
-            </div>
 
-        </div>
-    </div>
-
-    <div class="mb-4">
-        <h6 class="text-uppercase">Solid</h6>
-        <!-- Solid divider -->
-        <hr class="solid">
-    </div>
-
-    <div>
-        <h5 style="color: black"><p style="text-align: center">
-            Previous Schedules
-        </p></h5>
-    </div>
-
-    <div class="container mx-auto mt-4">
-        <div class="row">
-
-            <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                    {#  <img src="https://i.imgur.com/ZTkt4I5.jpg" class="card-img-top" alt="...">#}
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 ">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn mr-2"><i class="fa fa-link"></i>Go to Meeting</a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                    {#  <img src="https://i.imgur.com/ZTkt4I5.jpg" class="card-img-top" alt="...">#}
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn mr-2"><i class="fa fa-link"></i>Go to Meeting</a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                    {#  <img src="https://i.imgur.com/ZTkt4I5.jpg" class="card-img-top" alt="...">#}
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 ">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary mr-2"><i class="fa fa-link"></i>Go to Meeting</a>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
 
     </body>
     </html>

@@ -79,8 +79,10 @@ const app = new Vue({
      );
      if (onlineUserIndex < 0) {
        return "Offline";
+
      }
      return "Online";
+
    },
 
    async placeCall(id, calleeName) {
