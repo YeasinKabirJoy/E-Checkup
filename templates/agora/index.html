@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/call-button.css' %}">
     <link rel="icon" href="{% static 'image/favicon-16x16.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}">
 
     <link
             rel="stylesheet"
@@ -239,6 +240,37 @@
         </section>
     </main>
 </main>
+
+
+<footer class="site-footer" style="margin-top: 50px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+            <p class="text-justify">
+                An online platform where patients can seek treatments from doctors through video calling very easily.
+            </p>
+          </div>
+          <div class="col-xs-6 col-md-3">
+              <h6 style="color: white;">Address</h6>
+            <p>A,Green Road,<br>
+             Dhaka-1205,<br>
+             Bangladesh<br>
+            </p>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright: 2021 All Rights Reserved by E-Checkup
+            </p>
+          </div>
+        </div>
+      </div>
+</footer>
+
 <!-- Add Scripts -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pusher/7.0.3/pusher.min.js"></script>
@@ -259,6 +291,7 @@
     const AUTH_USER = "{{user}}"
     const AUTH_USER_ID = "{{request.user.id}}"
     const CSRF_TOKEN = "{{ csrf_token }}"
+
 </script>
 <script
         src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
