@@ -18,8 +18,8 @@
         <div class="row g-2">
             {% for d in  doctors %}
                 {% if  d.name is not None %}
-                    <div class="col-md-3">
-                        <div class="card p-2 py-3 text-center" style="background: #071c34; height: 100%; color:white">
+                    <div class="col-md-3" style="margin-bottom: 10px;">
+                        <div class="card p-2 py-3 text-center" style="background: #071c34; height: 100%; color:white;">
                             <div class="img mb-2"><img src="{{ d.image.url }}" width="60" height="60"
                                                        class="rounded-circle"></div>
                             <h5 class="mb-0" style="color: #FFE333 "><b>{{ d.name }}</b></h5> <small style="color:#85C1E9;">{{ d.speciality }}</small>
