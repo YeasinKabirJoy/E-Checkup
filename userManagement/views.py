@@ -8,7 +8,7 @@ from .meetingForm import MeetingForm
 from .models import PatientProfile, DoctorProfile,Types,Doctor,RegisteredEmail,Meeting
 import random
 import string
-
+from django.db.models import Q
 
 def registration(request):
     form = RegistrationForm()
@@ -53,7 +53,10 @@ def show_profile(request):
 
 
 def doctor_list(request):
-    doctors = DoctorProfile.objects.all()
+    if request.method == "POST":
+        doctors = DoctorProfile.objects.filter(Q(name__icontains=request.POST['search']) | Q(speciality__icontains=request.POST['search']) | Q(hospital_name__icontains=request.POST['search']))
+    else:
+        doctors = DoctorProfile.objects.all()
 
     context={
         'doctors':doctors

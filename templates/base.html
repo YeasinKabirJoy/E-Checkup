@@ -69,9 +69,10 @@
                     aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="fa fa-bars"></span> Menu
             </button>
-            <form action="#" class="searchform order-lg-last">
+            <form method="POST" action="{% url 'doctor_list' %}" class="searchform order-lg-last">
+                {% csrf_token %}
                 <div class="form-group d-flex">
-                    <input type="text" class="form-control pl-3" placeholder="Search">
+                    <input type="text" class="form-control pl-3" placeholder="Search" name="search">
                     <button type="submit" placeholder="" class="form-control search"><span class="fa fa-search"></span>
                     </button>
                 </div>
@@ -165,6 +166,43 @@
     </div>
 </section>
 <!-- END nav -->
+
+<footer class="site-footer" style="margin-top: 50px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+            <p class="text-justify">
+                The main goal is to build a system where everyone can easily file their complaint without any
+                hesitation or hassle.
+                The platform will be less time consuming for both students and the authority.
+            </p>
+          </div>
+          <div class="col-xs-6 col-md-3">
+              <h4>Address</h4>
+            <p>A,Green Road,<br>
+             Dhaka-1205,<br>
+             Bangladesh<br>
+             PABX:+8802-5874/A,<br>
+             Green Road,Dhaka-1205,<br>
+             Bangladesh<br>
+             PABX:+880258157091-4,6<br>
+            </p>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright: 2021 All Rights Reserved by C2C
+            </p>
+          </div>
+        </div>
+      </div>
+</footer>
+
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
