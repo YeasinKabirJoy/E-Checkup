@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import dotenv
 dotenv.load_dotenv()
+import django_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -179,6 +180,7 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL ='login'
 
 FILTERS_DISABLE_HELP_TEXT = True
+django_heroku.settings(locals())
 
 
 
