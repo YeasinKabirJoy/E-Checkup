@@ -1,1 +1,1 @@
-web: gunicorn E-Checkup.wsgi --log-file -
+web: gunicorn E_Checkup.wsgi --log-file -
